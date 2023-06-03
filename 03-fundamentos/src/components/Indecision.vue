@@ -1,70 +1,49 @@
 <template>
-    <img v-if="img"  :src="img" alt="bg" >
+    <img :src="img" alt="bg"/>
+
     <div class="bg-dark"></div>
-
     <div class="indecision-container">
-
-        <input 
-            type="text" 
-            placeholder="Hazme una pregunta"
-            v-model="question"
-            >
-        <p>Termina la pregunta con (?)</p>
-
+        <input type="text" v-model="question" placeholder="Hax una pregunta">
+        <p>recuerda terminar con signo ?</p>
         <div>
-           
-            <p v-if="isValidQuestion"> {{ question }}</p>
-            <p>{{ answer }}</p>
+            <p>{{question}}</p>
+            <h1 v-if="isValidQuestion">{{answer}}</h1>
+
         </div>
-    
     </div>
-
-
-
-
-
 </template>
 
 <script>
 export default {
-
-    name: "indecision",
+    name: 'Indecision',
     data(){
         return {
             question: null,
             answer: null,
-            img: null,
-            isValidQuestion: false
+            img: "https://via.placeholder.com/250",
+            isValidQuestion: false,
         }
     },
     methods: {
         async getAnswer() {
-            
-            this.answer = "...pensando";
-
-            const {answer, image} = await fetch('https://yesno.wtf/api').then( res => res.json() );
-           
-            this.answer = answer === "yes" ? "Si" : "No!";
+            this.answer = "pensando...";
+            const {answer, image} = await fetch('https://yesno.wtf/api').then(r => r.json());
+            this.answer = answer === "yes"  ? "Si!!!" : "No!!!";
             this.img = image;
-
 
         }
     },
     watch: {
-        question( value ,oldValue){
+        question(value){
+            this.isValidQuestion = false;
 
-           this.isValidQuestion = false;
+            if(!value.includes('?')) return;
 
-           if( !value.includes('?') ) return;
+            this.isValidQuestion = true;
 
-           this.isValidQuestion = true;
-
-            // TODO: REalizar petición http
             this.getAnswer();
-           
         }
     }
-
 }
 </script>
 

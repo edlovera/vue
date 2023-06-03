@@ -1,21 +1,17 @@
 <template>
-
-  <Indecision/>
-
- <!-- <Contador :start="150"/> -->
+  <img alt="Vue logo" src="./assets/logo.png" />
+  <Indecision titulo="Entraron" :start="15"/>
 </template>
 
 <script>
-//import Contador from '@/components/Counter.vue'
-import Indecision from '@/components/Indecision.vue'
-
+import Indecision from './components/Indecision.vue'; 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    //Contador,
-    Indecision
-  }
-}
+    Indecision,
+
+  },
+};
 </script>
 
 <style>

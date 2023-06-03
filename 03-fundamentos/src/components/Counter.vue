@@ -1,94 +1,53 @@
 <template>
-    <h2>{{customTitulo}}</h2>
-    <p>{{counter}} <sup>2</sup>=  {{counter * counter}} </p>
-    
+    <h2>{{getTitulo}}</h2>
+    <p>{{counter}}<sup>2</sup> = {{getMultiplicador}}</p>
+
     <div>
-        <button @click="addCounter">+1</button>
-        <button @click="decrementCounter">-1</button>
+        <button @click="add">+1</button>
+        <button @click="sub">-1</button>
     </div>
-    
-    <!--
-    <p>{{counter}} <sup>2</sup>=  {{getSqureValue()}} </p>
-    <p>{{counter}} <sup>2</sup>=  {{getSqureValue()}} </p>
-    <p>{{counter}} <sup>2</sup>=  {{getSqureValue()}} </p>
-    <p>{{counter}} <sup>2</sup>=  {{getSqureValue()}} </p>
-    <p>{{counter}} <sup>2</sup>=  {{getSqureValue()}} </p>
-
-    
-    <p>{{counter}} <sup>2</sup>=  {{squereCounter}} </p>
-    <p>{{counter}} <sup>2</sup>=  {{squereCounter}} </p>
-    <p>{{counter}} <sup>2</sup>=  {{squereCounter}} </p>
-    <p>{{counter}} <sup>2</sup>=  {{squereCounter}} </p>
-    <p>{{counter}} <sup>2</sup>=  {{squereCounter}} </p>
-    -->
-
 </template>
 
 <script>
 export default {
-
+    name: 'Counter',
     props: {
-        tituloDelLibro: String,
+        titulo: String,
         start: {
             type: Number,
-            //required: true,
             default: 100,
-            validator (value) {
-                return value >= 100
+            validator( value ){
+                return value > 100
             }
         }
-        
     },
-
-    name:'Counter',
-
     data() {
-        return {
-            counter: this.start
+        return{
+            counter : this.start
         }
     },
     methods: {
-        getSqureValue() {
-            console.log('methods'); 
+        multiplicador(){
             return this.counter * this.counter
         },
-        addCounter() {
-            this.counter++;
+        add(){
+            return this.counter++;
         },
-        decrementCounter() {
-            this.counter--;
+        sub(){
+            return this.counter--;
         }
     },
     computed: {
-        squereCounter() {    
-            console.log('computed');        
-            return this.counter * this.counter
+        getMultiplicador(){
+             return this.counter * this.counter
         },
-        customTitulo() {
-            return this.tituloDelLibro || 'Counter'
+        getTitulo(){
+            return this.titulo || 'Counter'
         }
     }
-
 }
 </script>
 
 <style>
-
-    button{
-        background-color: #41b883;
-        border: 1px solid #82cfad;
-        border-radius: 5px;
-        color: white;
-        cursor: pointer;
-        margin: 0 5px;
-        padding: 5px 15px;
-        transition: 0.3s ease-in-out;
-    }
-    button:hover{        
-        background-color: #3a8f69;
-    }
-    button:active{
-        background-color: #4dc991;
-    }
 
 </style>
